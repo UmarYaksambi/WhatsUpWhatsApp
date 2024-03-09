@@ -14,8 +14,13 @@ def clean_data(chats):
     return chats
 
 def load_chat_data(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        return file.read()
+    try:    
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+        
+    except FileNotFoundError:
+        print("The File does not exist at the location specified.\nPlease check for typos or provide the correct file path.")
+        raise SystemExit
 
 def extract_chat_data(chats):
     pattern = re.compile(r"(\d{2}/\d{2}/\d{4}), (\d{1,2}:\d{2}.[ap]m) - (.+?): (.+)")
